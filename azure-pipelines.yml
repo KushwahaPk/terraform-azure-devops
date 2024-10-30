@@ -19,7 +19,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              workingDirectory: 'codebase1'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
               backendServiceArm: 'acr-aks-spn'
               backendAzureRmResourceGroupName: 'devops-test-rg'
               backendAzureRmStorageAccountName: 'teststorage45678'
@@ -30,13 +30,13 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'validate'
-              workingDirectory: 'codebase1'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
             
           - task: TerraformTaskV4@4
             displayName: tf plan
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              workingDirectory: 'codebase1'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
           

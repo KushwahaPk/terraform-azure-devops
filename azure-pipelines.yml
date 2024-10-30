@@ -23,14 +23,14 @@ stages:
               backendAzureRmResourceGroupName: 'devops-test-rg'
               backendAzureRmStorageAccountName: 'teststorage45678'
               backendAzureRmContainerName: 'stfstatefile'
-              backendAzureRmKey: 'terraform.tfstate'
+              backendAzureRmKey: 'dev.terraform.tfstate'
           - task: TerraformTaskV4@4
-            displayName: validate
+            displayName: tf validate
             inputs:
               provider: 'azurerm'
               command: 'validate'
           - task: TerraformTaskV4@4
-            displayName: plan
+            displayName: tf plan
             inputs:
               provider: 'azurerm'
               command: 'plan'

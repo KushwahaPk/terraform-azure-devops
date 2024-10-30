@@ -4,7 +4,7 @@ module "virtual_machine" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "testing-resources"
+  name     = "demo-resources-rg"
   location = "East US"
 }
 

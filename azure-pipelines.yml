@@ -39,4 +39,11 @@ stages:
               command: 'plan'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
+              environmentServiceNameAzureRM: 'acr-aks-spn'
+          
           

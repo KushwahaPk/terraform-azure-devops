@@ -14,7 +14,18 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'validate'
-              workingDirectory: 'codebase1/Codebase/terraform_machine'     
+              workingDirectory: 'codebase1/Codebase/terraform_machine'    
+          - task: TerraformTaskV4@4
+            displayName: Terraform init
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
+              backendServiceArm: 'acr-aks-spn'
+              backendAzureRmResourceGroupName: 'devops-test-rg'
+              backendAzureRmStorageAccountName: 'teststorage45678'
+              backendAzureRmContainerName: 'stfstatefile'
+              backendAzureRmKey: 'dev.terraform.tfstate' 
   - stage: tfapply
     condition: succeeded('tfvalidate')
     dependsOn: tfvalidate

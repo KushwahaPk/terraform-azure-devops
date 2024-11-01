@@ -3,18 +3,12 @@ trigger:
 
 pool: selfhosted-pool-01
 
-# variables:
-  
 stages:
   - stage: tfvalidate
     jobs:
       - job: validate
         continueOnError: false
         steps:
-          # - task: TerraformInstaller@1
-          #   displayName: tfinstall
-          #   inputs:
-          #     terraformVersion: 'latest'
           - task: TerraformTaskV4@4
             inputs:
               provider: 'azurerm'

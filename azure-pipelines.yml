@@ -2,13 +2,24 @@ trigger:
 - none
 
 pool: selfhosted-pool-01
-
-# variables:
   
 stages:
   - stage: tfvalidate
     jobs:
       - job: validate
+        continueOnError: false
+        steps:  
+          - task: TerraformTaskV4@4
+            displayName: terraform validate
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'     
+  - stage: tfapply
+    condition: succeeded('tfvalidate')
+    dependsOn: tfvalidate
+    jobs:
+      - job: tfinit
         continueOnError: false
         steps:
           - task: TerraformTaskV4@4
@@ -23,26 +34,12 @@ stages:
               backendAzureRmContainerName: 'stfstatefile'
               backendAzureRmKey: 'dev.terraform.tfstate'
           - task: TerraformTaskV4@4
-            displayName: terraform validate
-            inputs:
-              provider: 'azurerm'
-              command: 'validate'
-              workingDirectory: 'codebase1/Codebase/terraform_machine'
-            
-          - task: TerraformTaskV4@4
             displayName: terraform plan
             inputs:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
-  - stage: tfapply
-    condition: succeeded('tfvalidate')
-    dependsOn: tfvalidate
-    jobs:
-      - job: validate
-        continueOnError: false
-        steps:
           - task: TerraformTaskV4@4
             displayName: terrfaorm apply
             inputs:
@@ -50,12 +47,6 @@ stages:
               command: 'apply'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
-          # - task: TerraformTaskV4@4
-          #   inputs:
-          #     provider: 'azurerm'
-          #     command: 'destroy'
-          #     workingDirectory: 'codebase1/Codebase/terraform_machine'
-          #     environmentServiceNameAzureRM: 'acr-aks-spn'
           
           
           

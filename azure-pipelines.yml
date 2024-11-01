@@ -19,7 +19,7 @@ stages:
     condition: succeeded('tfvalidate')
     dependsOn: tfvalidate
     jobs:
-      - job: tfinit
+      - job: apply
         continueOnError: false
         steps:
           - task: TerraformTaskV4@4

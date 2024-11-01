@@ -37,6 +37,8 @@ stages:
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
   - stage: tfapply
+    condition: succeeded('tfvalidate')
+    dependsOn: tfvalidate
     jobs:
       - job: validate
         continueOnError: false

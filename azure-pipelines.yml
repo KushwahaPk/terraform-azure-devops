@@ -9,12 +9,12 @@ stages:
       - job: validate
         continueOnError: false
         steps:  
-          - task: TerraformTaskV4@4
-            displayName: terraform validate
-            inputs:
-              provider: 'azurerm'
-              command: 'validate'
-              workingDirectory: 'codebase1/Codebase/terraform_machine'    
+          # - task: TerraformTaskV4@4
+          #   displayName: terraform validate
+          #   inputs:
+          #     provider: 'azurerm'
+          #     command: 'validate'
+          #     workingDirectory: 'codebase1/Codebase/terraform_machine'    
           - task: TerraformTaskV4@4
             displayName: Terraform init
             inputs:
@@ -26,6 +26,12 @@ stages:
               backendAzureRmStorageAccountName: 'teststorage45678'
               backendAzureRmContainerName: 'stfstatefile'
               backendAzureRmKey: 'dev.terraform.tfstate' 
+          - task: TerraformTaskV4@4
+            displayName: terraform validate
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
   - stage: tfapply
     condition: succeeded('tfvalidate')
     dependsOn: tfvalidate

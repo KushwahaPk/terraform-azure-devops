@@ -10,15 +10,15 @@ stages:
         continueOnError: false
         steps:
           - task: TerraformTaskV4@4
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              workingDirectory: 'codebase1/Codebase/terraform_machine'
-              backendServiceArm: 'acr-aks-spn'
-              backendAzureRmResourceGroupName: 'devops-test-rg'
-              backendAzureRmStorageAccountName: 'teststorage45678'
-              backendAzureRmContainerName: 'stfstatefile'
-              backendAzureRmKey: 'dev.terraform.tfstate'
+            # inputs:
+              # provider: 'azurerm'
+              # command: 'init'
+              # workingDirectory: 'codebase1/Codebase/terraform_machine'
+              # backendServiceArm: 'acr-aks-spn'
+              # backendAzureRmResourceGroupName: 'devops-test-rg'
+              # backendAzureRmStorageAccountName: 'teststorage45678'
+              # backendAzureRmContainerName: 'stfstatefile'
+              # backendAzureRmKey: 'dev.terraform.tfstate'
             inputs:
               provider: 'azurerm'
               command: 'destroy'

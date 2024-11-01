@@ -23,7 +23,7 @@ stages:
               backendAzureRmContainerName: 'stfstatefile'
               backendAzureRmKey: 'dev.terraform.tfstate'
           - task: TerraformTaskV4@4
-            displayName: tf validate
+            displayName: terraform validate
             inputs:
               provider: 'azurerm'
               command: 'validate'

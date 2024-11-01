@@ -1,1 +1,32 @@
-#
+trigger:
+- none
+
+pool: selfhosted-pool-01
+
+# variables:
+  
+stages:
+  - stage: tfvalidate
+    jobs:
+      - job: validate
+        continueOnError: false
+        steps:
+          # - task: TerraformInstaller@1
+          #   displayName: tfinstall
+          #   inputs:
+          #     terraformVersion: 'latest'
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
+              backendServiceArm: 'acr-aks-spn'
+              backendAzureRmResourceGroupName: 'devops-test-rg'
+              backendAzureRmStorageAccountName: 'teststorage45678'
+              backendAzureRmContainerName: 'stfstatefile'
+              backendAzureRmKey: 'dev.terraform.tfstate'
+            inputs:
+              provider: 'azurerm'
+              command: 'destroy'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
+              environmentServiceNameAzureRM: 'acr-aks-spn'

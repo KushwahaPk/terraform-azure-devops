@@ -4,23 +4,37 @@ trigger:
 pool: selfhosted-pool-01
 
 stages:
-  - stage: tfvalidate
+  - stage: tfdestroy
     jobs:
-      - job: validate
-        continueOnError: false
+      - job: destroy
+        # continueOnError: false
         steps:
           - task: TerraformTaskV4@4
-            # inputs:
-              # provider: 'azurerm'
-              # command: 'init'
-              # workingDirectory: 'codebase1/Codebase/terraform_machine'
-              # backendServiceArm: 'acr-aks-spn'
-              # backendAzureRmResourceGroupName: 'devops-test-rg'
-              # backendAzureRmStorageAccountName: 'teststorage45678'
-              # backendAzureRmContainerName: 'stfstatefile'
-              # backendAzureRmKey: 'dev.terraform.tfstate'
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
+              backendServiceArm: 'acr-aks-spn'
+              backendAzureRmResourceGroupName: 'devops-test-rg'
+              backendAzureRmStorageAccountName: 'teststorage45678'
+              backendAzureRmContainerName: 'stfstatefile'
+              backendAzureRmKey: 'dev.terraform.tfstate'
+          - task: TerraformTaskV4@4
+            displayName: terraform destroy plan
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
+              environmentServiceNameAzureRM: 'acr-aks-spn'
+          - task: TerraformTaskV4@4
+            displayName: Terraform destroy
             inputs:
               provider: 'azurerm'
               command: 'destroy'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
+            # inputs:
+            #   provider: 'azurerm'
+            #   command: 'destroy'
+            #   workingDirectory: 'codebase1/Codebase/terraform_machine'
+            #   environmentServiceNameAzureRM: 'acr-aks-spn'

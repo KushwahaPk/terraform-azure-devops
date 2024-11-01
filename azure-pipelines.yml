@@ -30,13 +30,19 @@ stages:
               workingDirectory: 'codebase1/Codebase/terraform_machine'
             
           - task: TerraformTaskV4@4
-            displayName: tf plan
+            displayName: terraform plan
             inputs:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
+  - stage: tfapply
+    jobs:
+      - job: validate
+        continueOnError: false
+        steps:
           - task: TerraformTaskV4@4
+            displayName: terrfaorm apply
             inputs:
               provider: 'azurerm'
               command: 'apply'

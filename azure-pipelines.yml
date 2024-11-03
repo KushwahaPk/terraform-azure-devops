@@ -59,14 +59,14 @@ stages:
               targetType: 'inline'
               script: 'terraform state list'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
-          - task: Bash@3 
-            displayName: Terraform State refresh
-            inputs:
-              targetType: 'inline'
-              script: |
-                set -e 
-                terraform refresh || { echo "Terraform refresh failed"; exit 1; }
-              workingDirectory: 'codebase1/Codebase/terraform_machine'
+          # - task: Bash@3 
+          #   displayName: Terraform State refresh
+          #   inputs:
+          #     targetType: 'inline'
+          #     script: |
+          #       set -e 
+          #       terraform refresh || { echo "Terraform refresh failed"; exit 1; }
+          #     workingDirectory: 'codebase1/Codebase/terraform_machine'
           # - task: Bash@3 
           #   displayName: Unlock Terraform State
           #   inputs:

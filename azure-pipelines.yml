@@ -2,6 +2,8 @@ trigger:
 - none
 
 pool: selfhosted-pool-01
+variables:
+- group: VM_Credentials
   
 stages:
   - stage: tfvalidate

@@ -46,13 +46,21 @@ stages:
               backendAzureRmStorageAccountName: 'teststorage45678'
               backendAzureRmContainerName: 'stfstatefile'
               backendAzureRmKey: 'dev.terraform.tfstate'
-          - task: AzureCLI@2
+          - task: TerraformTaskV4@4
             inputs:
-              azureSubscription: 'acr-aks-spn'
-              scriptType: 'batch'
-              scriptLocation: 'inlineScript'
-              inlineScript: 'terraform force-unlock baafeaf0-53d9-f59d-1197-7bd9c313def8'
+              provider: 'azurerm'
+              command: 'custom'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
+              outputTo: 'console'
+              customCommand: 'terraform force-unlock baafeaf0-53d9-f59d-1197-7bd9c313def8'
+              environmentServiceNameAzureRM: 'acr-aks-spn'
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: 'acr-aks-spn'
+          #     scriptType: 'batch'
+          #     scriptLocation: 'inlineScript'
+          #     inlineScript: 'terraform force-unlock baafeaf0-53d9-f59d-1197-7bd9c313def8'
+          #     workingDirectory: 'codebase1/Codebase/terraform_machine'
           - task: TerraformTaskV4@4
             displayName: terraform plan
             inputs:

@@ -6,8 +6,8 @@ locals {
       resource_group_name = azurerm_resource_group.example.name
       location            = azurerm_resource_group.example.location
       vm_size             = "Standard_DS1_v2"
-      admin_username      = "adminuser1"
-      admin_password      = "Admin@0987654"
+      admin_username      = var.admin_username
+      admin_password      = var.admin_password
       lun  = 1
       disk_size_gb = 200
       network_interface_id = azurerm_network_interface.example1.id

@@ -35,6 +35,13 @@ stages:
       - job: apply
         continueOnError: false
         steps:
+          - task: Bash@3
+            displayName: Install Azure CLI
+            inputs:
+              targetType: 'inline'
+              script: |
+                curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
           - task: TerraformTaskV4@4
             displayName: Terraform init
             inputs:

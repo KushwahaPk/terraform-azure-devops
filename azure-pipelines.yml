@@ -2,8 +2,8 @@ trigger:
 - none
 
 pool: selfhosted-pool-01
-variables:
-- group: VM_Credentials
+# variables:
+# - group: VM_Credentials
   
 stages:
   - stage: tfvalidate
@@ -52,13 +52,13 @@ stages:
               targetType: 'inline'
               script: 'terraform state list'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
-          - task: Bash@3 
-            displayName: Unlock Terraform State
-            inputs:
-              targetType: 'inline'
-              script: |
-                echo "yes" | terraform force-unlock baafeaf0-53d9-f59d-1197-7bd9c313def8
-              workingDirectory: 'codebase1/Codebase/terraform_machine'
+          # - task: Bash@3 
+          #   displayName: Unlock Terraform State
+          #   inputs:
+          #     targetType: 'inline'
+          #     script: |
+          #       echo "yes" | terraform force-unlock baafeaf0-53d9-f59d-1197-7bd9c313def8
+              # workingDirectory: 'codebase1/Codebase/terraform_machine'
           - task: TerraformTaskV4@4
             displayName: terraform plan
             inputs:

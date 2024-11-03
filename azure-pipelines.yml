@@ -53,6 +53,12 @@ stages:
               command: 'plan'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'acr-aks-spn'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: 'terraform state list'
           - task: TerraformTaskV4@4
             displayName: terrfaorm apply
             inputs:
@@ -60,6 +66,7 @@ stages:
               command: 'apply'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
+            
           
           
           

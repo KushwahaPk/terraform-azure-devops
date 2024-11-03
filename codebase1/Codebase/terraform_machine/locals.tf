@@ -24,8 +24,8 @@ locals {
       network_interface_id = azurerm_network_interface.example2.id
     }
     # Add more VM configurations as needed
+     */
   }
-  */
 }
 
 

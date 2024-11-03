@@ -46,15 +46,11 @@ stages:
               backendAzureRmStorageAccountName: 'teststorage45678'
               backendAzureRmContainerName: 'stfstatefile'
               backendAzureRmKey: 'dev.terraform.tfstate'
-          - task: TerraformTaskV4@4
+          - task: Bash@3 
             inputs:
-              provider: 'azurerm'
-              command: 'state unlock'
-              workingDirectory: 'codebase1/Codebase/terraform_machine'
-              outputTo: 'console'
-              commandOptions: '-id baafeaf0-53d9-f59d-1197-7bd9c313def8'
-              environmentServiceNameAzureRM: 'acr-aks-spn'
-           
+              targetType: 'inline'
+              script: 'terraform state force-unlock -force baafeaf0-53d9-f59d-1197-7bd9c313def8'
+          
           # - task: AzureCLI@2
           #   inputs:
           #     azureSubscription: 'acr-aks-spn'

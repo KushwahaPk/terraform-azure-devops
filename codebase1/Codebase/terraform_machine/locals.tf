@@ -11,8 +11,8 @@ locals {
       lun  = 1
       disk_size_gb = 200
       network_interface_id = azurerm_network_interface.example1.id
-    },
-    example2 = {
+    }
+   /* example2 = {
       name                = "demo-vm2"
       resource_group_name = azurerm_resource_group.example.name
       location            = azurerm_resource_group.example.location
@@ -25,6 +25,7 @@ locals {
     }
     # Add more VM configurations as needed
   }
+  */
 }
 
 

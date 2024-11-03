@@ -4,7 +4,6 @@ trigger:
 pool: selfhosted-pool-01
 variables:
 - group: VM_Credentials
-
   
 stages:
   - stage: tfvalidate
@@ -60,7 +59,6 @@ stages:
               provider: 'azurerm'
               command: 'apply'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
-              commandOptions: -var 'admin_username=$(admin_username)' -var 'admin_password=$(admin_password)'
               environmentServiceNameAzureRM: 'acr-aks-spn'
           
           

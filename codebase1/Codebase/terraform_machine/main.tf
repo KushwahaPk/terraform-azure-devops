@@ -33,7 +33,7 @@ resource "azurerm_network_interface" "example1" {
     private_ip_address_allocation = "Dynamic"
   }
 }
-
+/*
 resource "azurerm_network_interface" "example2" {
   name                = "test-nic2"
   location            = azurerm_resource_group.example.location
@@ -44,4 +44,5 @@ resource "azurerm_network_interface" "example2" {
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
   }
+  */
 }

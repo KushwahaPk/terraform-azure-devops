@@ -56,7 +56,8 @@ stages:
             displayName: Terraform State refresh
             inputs:
               targetType: 'inline'
-              script: 'terraform refresh'
+              script: |
+                terraform refresh
               workingDirectory: 'codebase1/Codebase/terraform_machine'
           # - task: Bash@3 
           #   displayName: Unlock Terraform State

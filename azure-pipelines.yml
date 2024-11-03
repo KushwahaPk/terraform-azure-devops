@@ -35,12 +35,12 @@ stages:
       - job: apply
         continueOnError: false
         steps:
-          - task: Bash@3
-            displayName: Install Azure CLI
-            inputs:
-              targetType: 'inline'
-              script: |
-                curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          # - task: Bash@3
+          #   displayName: Install Azure CLI
+          #   inputs:
+          #     targetType: 'inline'
+          #     script: |
+          #       curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
           - task: TerraformTaskV4@4
             displayName: Terraform init
@@ -64,7 +64,8 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                terraform refresh
+                set -e 
+                terraform refresh || { echo "Terraform refresh failed"; exit 1; }
               workingDirectory: 'codebase1/Codebase/terraform_machine'
           # - task: Bash@3 
           #   displayName: Unlock Terraform State

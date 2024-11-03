@@ -49,7 +49,7 @@ stages:
           - task: Bash@3 
             inputs:
               targetType: 'inline'
-              script: 'terraform state force-unlock -force baafeaf0-53d9-f59d-1197-7bd9c313def8'
+              script: 'terraform state list'
           
           # - task: AzureCLI@2
           #   inputs:

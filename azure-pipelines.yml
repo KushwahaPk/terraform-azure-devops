@@ -52,13 +52,13 @@ stages:
               targetType: 'inline'
               script: 'terraform state list'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
-          - task: Bash@3 
-            displayName: Unlock Terraform State
-            inputs:
-              targetType: 'inline'
-              script: |
-                echo "yes" | terraform force-unlock 12266fe7-41fb-3480-703d-dff39023834f
-              workingDirectory: 'codebase1/Codebase/terraform_machine'
+          # - task: Bash@3 
+          #   displayName: Unlock Terraform State
+          #   inputs:
+          #     targetType: 'inline'
+          #     script: |
+          #       echo "yes" | terraform force-unlock 12266fe7-41fb-3480-703d-dff39023834f
+          #     workingDirectory: 'codebase1/Codebase/terraform_machine'
           - task: TerraformTaskV4@4
             displayName: terraform plan
             inputs:

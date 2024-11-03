@@ -6,7 +6,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   size                = each.value.vm_size
   admin_username      = each.value.admin_username
   admin_password      = each.value.admin_password
-
+  
   network_interface_ids = [
     each.value.network_interface_id,
   ]
@@ -21,6 +21,10 @@ resource "azurerm_windows_virtual_machine" "example" {
     offer     = "WindowsServer"
     sku       = "2019-Datacenter"
     version   = "latest"
+  }
+  
+  tags = {
+    environment = "staging"
   }
 }
 resource "azurerm_managed_disk" "example" {

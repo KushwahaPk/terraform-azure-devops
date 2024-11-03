@@ -47,18 +47,17 @@ stages:
               backendAzureRmContainerName: 'stfstatefile'
               backendAzureRmKey: 'dev.terraform.tfstate'
           - task: Bash@3 
+            displayName: Terraform State list
             inputs:
               targetType: 'inline'
               script: 'terraform state list'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
-          
-          # - task: AzureCLI@2
-          #   inputs:
-          #     azureSubscription: 'acr-aks-spn'
-          #     scriptType: 'batch'
-          #     scriptLocation: 'inlineScript'
-          #     inlineScript: 'terraform force-unlock baafeaf0-53d9-f59d-1197-7bd9c313def8'
-          #     workingDirectory: 'codebase1/Codebase/terraform_machine'
+          - task: Bash@3 
+            displayName: Unlock Terraform State
+            inputs:
+              targetType: 'inline'
+              script: 'terraform state unlock baafeaf0-53d9-f59d-1197-7bd9c313def8'
+              workingDirectory: 'codebase1/Codebase/terraform_machine'
           - task: TerraformTaskV4@4
             displayName: terraform plan
             inputs:
@@ -66,13 +65,6 @@ stages:
               command: 'plan'
               workingDirectory: 'codebase1/Codebase/terraform_machine'
               environmentServiceNameAzureRM: 'acr-aks-spn'
-          - task: AzureCLI@2
-            inputs:
-              azureSubscription: 'acr-aks-spn'
-              scriptType: 'batch'
-              scriptLocation: 'inlineScript'
-              inlineScript: 'terraform state list'
-              workingDirectory: 'codebase1/Codebase/terraform_machine'
           - task: TerraformTaskV4@4
             displayName: terrfaorm apply
             inputs:

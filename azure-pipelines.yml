@@ -56,7 +56,8 @@ stages:
             displayName: Unlock Terraform State
             inputs:
               targetType: 'inline'
-              script: 'terraform state unlock baafeaf0-53d9-f59d-1197-7bd9c313def8'
+              script: |
+                terraform state unlock baafeaf0-53d9-f59d-1197-7bd9c313def8
               workingDirectory: 'codebase1/Codebase/terraform_machine'
           - task: TerraformTaskV4@4
             displayName: terraform plan
